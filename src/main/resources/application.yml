@@ -1,0 +1,26 @@
+#启动端口
+server:
+  port: 8080
+
+spring:
+
+#数据库设置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/roboweb?serverTimeZone=Asia/Shanghai&characterEncoding=utf-8
+    username: root
+    password: root
+
+#设置上传文件最大尺寸
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 100MB
+
+#设置xml和pojo路径
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.zk.roboweb.bean
+  configuration:
+    map-underscore-to-camel-case: true

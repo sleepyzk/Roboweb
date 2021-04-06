@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zk.roboweb.dao.ModelDao">
+    <resultMap id="BaseResultMap" type="com.zk.roboweb.bean.Model">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="model_name" jdbcType="VARCHAR" property="modelName"/>
+        <result column="model_type" jdbcType="VARCHAR" property="modelType"/>
+        <result column="cover_img" jdbcType="VARCHAR" property="coverImg"/>
+        <result column="upload_user" jdbcType="VARCHAR" property="uploadUser"/>
+        <result column="upload_time" jdbcType="TIMESTAMP" property="uploadTime"/>
+        <result column="file_format" jdbcType="VARCHAR" property="fileFormat"/>
+        <result column="file_size" jdbcType="INTEGER" property="fileSize"/>
+        <result column="download_times" jdbcType="INTEGER" property="downloadTimes"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_model
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.zk.roboweb.bean.Model">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into t_model (model_name, model_type, cover_img,
+        upload_user, upload_time, file_format,
+        file_size, download_times)
+        values (#{modelName,jdbcType=VARCHAR}, #{modelType,jdbcType=VARCHAR}, #{coverImg,jdbcType=VARCHAR},
+        #{uploadUser,jdbcType=VARCHAR}, #{uploadTime,jdbcType=TIMESTAMP}, #{fileFormat,jdbcType=VARCHAR},
+        #{fileSize,jdbcType=INTEGER}, #{downloadTimes,jdbcType=INTEGER})
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.zk.roboweb.bean.Model">
+    update t_model
+    set model_name = #{modelName,jdbcType=VARCHAR},
+      model_type = #{modelType,jdbcType=VARCHAR},
+      cover_img = #{coverImg,jdbcType=VARCHAR},
+      upload_user = #{uploadUser,jdbcType=VARCHAR},
+      upload_time = #{uploadTime,jdbcType=TIMESTAMP},
+      file_format = #{fileFormat,jdbcType=VARCHAR},
+      file_size = #{fileSize,jdbcType=INTEGER},
+      download_times = #{downloadTimes,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <update id="updateDownloadTimeByName" parameterType="java.lang.String">
+        update t_model set download_times = download_times + 1 where model_name = #{modelName}
+    </update>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, model_name, model_type, cover_img, upload_user, upload_time, file_format, 
+    file_size, download_times
+    from t_model
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+    <select id="selectAllByKeyword" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select * from t_model t
+        <where>
+            <if test="keyword !=null and keyword !=''">
+                and t.model_name like CONCAT('%',#{keyword},'%') or t.model_type like CONCAT('%',#{keyword},'%')
+            </if>
+        </where>
+    </select>
+</mapper>
