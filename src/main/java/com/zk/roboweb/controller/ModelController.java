@@ -74,7 +74,7 @@ public class ModelController {
      */
     @GetMapping("downloadZip")
     public void downloadZip(@RequestParam(value = "modelName") String modelName, HttpServletResponse response) {
-        String sourceUrl = "D:\\Java\\code\\roboweb\\src\\main\\resources\\static\\files";
+        String sourceUrl = "D:\\Java\\code\\Vue\\roboweb\\public\\model\\modelFile";
         String modelUrl = sourceUrl + "\\" + modelName;
         //设置response Header
         response.setContentType("application/zip;charset=utf-8");

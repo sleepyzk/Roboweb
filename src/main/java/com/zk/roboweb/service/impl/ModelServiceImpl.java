@@ -36,10 +36,11 @@ public class ModelServiceImpl implements ModelService {
     public void addModel(String modelName, String modelType, String uploadUser, String fileFormat,
                          MultipartFile[] modelFiles, MultipartFile coverImg) {
 
-        String basePath = "D:\\Java\\code\\roboweb\\src\\main\\resources\\static\\files";
+        String basePath = "D:\\Java\\code\\Vue\\roboweb\\public\\model\\modelFile";
         String modelPath = basePath + "\\" + modelName;
-        File path = new File(modelPath);
+        String imgPath = "D:\\Java\\code\\Vue\\roboweb\\public\\model\\modelImg";
 
+        File path = new File(modelPath);
         //创建上传文件夹
         if (!path.exists()) {
             path.mkdirs();
@@ -58,7 +59,7 @@ public class ModelServiceImpl implements ModelService {
         }
         if (!coverImg.isEmpty()) {
             try {
-                coverImg.transferTo(new File(modelPath, Objects.requireNonNull(coverImg.getOriginalFilename())));
+                coverImg.transferTo(new File(imgPath, Objects.requireNonNull(coverImg.getOriginalFilename())));
             } catch (IOException e) {
                 e.printStackTrace();
             }
