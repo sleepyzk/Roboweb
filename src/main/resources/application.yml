@@ -1,6 +1,8 @@
 #启动端口
 server:
   port: 8080
+  tomcat:
+    max-http-form-post-size: -1
 
 spring:
 
@@ -15,8 +17,8 @@ spring:
 #设置上传文件最大尺寸
   servlet:
     multipart:
-      max-file-size: 50MB
-      max-request-size: 100MB
+      max-file-size: 1000MB
+      max-request-size: 1000MB
 
 #设置xml和pojo路径
 mybatis:

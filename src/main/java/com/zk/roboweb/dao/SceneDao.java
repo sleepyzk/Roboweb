@@ -10,7 +10,7 @@ public interface SceneDao {
 
     Scene selectByPrimaryKey(Integer id);
 
-    List<Scene> selectAll();
+    List<Scene> selectAll(String keyword);
 
     int updateByPrimaryKey(Scene record);
 }

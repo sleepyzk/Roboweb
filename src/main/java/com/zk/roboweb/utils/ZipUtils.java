@@ -190,7 +190,7 @@ public class ZipUtils {
         in.close();
         out.close();
     }
-//    public static void main(String[] args) throws Exception {
+//    public static void Main(String[] args) throws Exception {
 //        /** 测试压缩方法1 */
 //        FileOutputStream fos1 = new FileOutputStream(new File("E:\\aaaDEel\\fileMail\\mytest01.zip"));
 //        ZipUtils.toZip("D:\\upload", fos1, true);
