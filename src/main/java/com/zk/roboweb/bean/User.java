@@ -19,9 +19,11 @@ public class User {
 
     private String passWord;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm", timezone = "GMT+8")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date registerTime;
 
     private Integer roleId;
+
+    private String registerPlace;
 
 }

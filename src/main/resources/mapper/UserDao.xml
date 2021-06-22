@@ -7,6 +7,7 @@
     <result column="pass_word" jdbcType="VARCHAR" property="passWord" />
     <result column="register_time" jdbcType="TIMESTAMP" property="registerTime" />
     <result column="role_id" jdbcType="INTEGER" property="roleId" />
+    <result column="register_place" jdbcType="VARCHAR" property="registerPlace" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from t_user
@@ -17,25 +18,26 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into t_user (user_name, pass_word, register_time,
-      role_id)
+      role_id, register_place)
     values (#{userName,jdbcType=VARCHAR}, #{passWord,jdbcType=VARCHAR}, #{registerTime,jdbcType=TIMESTAMP}, 
-      #{roleId,jdbcType=INTEGER})
+      #{roleId,jdbcType=INTEGER}, #{registerPlace,jdbcType=VARCHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.zk.roboweb.bean.User">
     update t_user
     set user_name = #{userName,jdbcType=VARCHAR},
       pass_word = #{passWord,jdbcType=VARCHAR},
       register_time = #{registerTime,jdbcType=TIMESTAMP},
-      role_id = #{roleId,jdbcType=INTEGER}
+      role_id = #{roleId,jdbcType=INTEGER},
+      register_place = #{registerPlace,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select id, user_name, pass_word, register_time, role_id
+    select id, user_name, pass_word, register_time, role_id, register_place
     from t_user
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    select id, user_name, pass_word, register_time, role_id
+    select id, user_name, pass_word, register_time, role_id, register_place
     from t_user
   </select>
 </mapper>
